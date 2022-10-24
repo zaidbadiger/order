@@ -14,12 +14,14 @@ public class Order {
     private Address address;
     private PaymentInfo payment;
     private List<Item> items;
+    private String error;
 
     public Order(long id, Address address, PaymentInfo payment, List<Item> items){
         this.id = id;
         this.address = address;
         this.payment = payment;
         this.items = items;
+        this.error = "";
     }
 
     public long getId() {
@@ -40,6 +42,12 @@ public class Order {
         return items;
     }
 
+    public String getError() {
+        return error;
+    }
     
+    public void setError(String error) {
+        this.error = error;
+    }
 
 }
