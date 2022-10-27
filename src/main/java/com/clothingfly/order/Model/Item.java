@@ -65,4 +65,7 @@ public class Item {
         this.inventory = inventory;
         this.imageUrl = imageUrl;
     }
+
+    public Item() {
+  }
 }

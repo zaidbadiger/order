@@ -27,7 +27,7 @@ public class OrderController {
         while (it.hasNext()) {
             Item orderItem = it.next();
             Item item = restTemplate.getForObject("http://localhost:8080/items/" + orderItem.getId(), Item.class);
-            if (orderItem.getQuantity() > item.getInventory()) {
+            if (Long.compare(orderItem.getQuantity(), item.getInventory()) > 0) {
                 error += "Error! Not Enough Inventory For " + item.getName() + "! ";
             }
         }
@@ -39,7 +39,4 @@ public class OrderController {
         checkInventory(order);
         return orderService.postOrder(order);
     }
-
-
-
 }
