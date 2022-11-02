@@ -1,19 +1,29 @@
 package com.clothingfly.order.Model;
 
-
-import javax.persistence.Entity;
-
-import org.springframework.data.annotation.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "items")
 public class Item {
 
     @Id
+    @GeneratedValue
+    @Column(name = "id")
     private long id;
+
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "price")
     private float price;
+
+    @Column(name = "imageUrl")
     private String imageUrl;
+
+    @Column(name = "quantity")
     private long quantity;
+
+    @Column(name = "inventory")
     private long inventory;
 
     public long getId() {
@@ -44,7 +54,6 @@ public class Item {
         this.inventory = inventory;
     }
 
-
     public void setName(String name) {
         this.name = name;
     }
@@ -67,5 +76,6 @@ public class Item {
     }
 
     public Item() {
+
   }
 }
