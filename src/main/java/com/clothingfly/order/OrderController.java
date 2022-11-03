@@ -21,8 +21,7 @@ public class OrderController {
     TempOrderRepository orderRepository;
 
 
-    private boolean checkInventory(Order order) {
-        boolean notEnoughInventory = false;
+    private void checkInventory(Order order) {
         RestTemplate restTemplate = new RestTemplate();
         ListIterator<Item> it = order.getItems().listIterator();
         String error = "";
@@ -31,11 +30,9 @@ public class OrderController {
             Item item = restTemplate.getForObject("http://localhost:8080/items/" + orderItem.getId(), Item.class);
             if (Long.compare(orderItem.getQuantity(), item.getInventory()) > 0) {
                 error += "Error! Not Enough Inventory For " + item.getName() + "! ";
-                notEnoughInventory = true;
             }
         }
         order.setError(error);
-        return notEnoughInventory;
     }
 
     @PostMapping("/order")
