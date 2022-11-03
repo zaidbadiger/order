@@ -21,7 +21,9 @@ public class PaymentInfo {
   @Column(name = "cvv")
   private String cvv;
 
-
+  public PaymentInfo() {
+  
+  }
 
   public PaymentInfo(String cardHolder, String cardNumber, String expirationDate, String cvv) {
     this.cardHolder = cardHolder;

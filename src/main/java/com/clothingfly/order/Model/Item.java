@@ -2,17 +2,23 @@ package com.clothingfly.order.Model;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.Generated;
+
 @Entity
 @Table(name = "items")
 public class Item {
 
-    @Id
-    @GeneratedValue
+    
     @Column(name = "id")
     private long id;
 
     @Column(name = "name")
     private String name;
+
+    @Id
+    @GeneratedValue
+    @Column(name = "uniqueID")
+    private long uniqueID;
 
     @Column(name = "price")
     private float price;
@@ -32,6 +38,10 @@ public class Item {
 
     public String getName() {
         return name;
+    }
+
+    public long getItemNumber() {
+        return id;
     }
 
     public float getPrice() {

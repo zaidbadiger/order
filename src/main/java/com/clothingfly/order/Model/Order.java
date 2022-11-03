@@ -12,16 +12,16 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @OneToOne
-    @JoinColumn(name = "address_id", referencedColumnName = "id")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="ADDRESS_INFO_ID_FK")
     private Address address;
 
-    @OneToOne
-    @JoinColumn(name = "payment_id", referencedColumnName = "id")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="PAYMENT_INFO_ID_FK")
     private PaymentInfo payment;
 
-    @ManyToMany
-    @JoinColumn(name = "items_id", referencedColumnName = "id")
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name="CUSTOMER_ORDER_ID_FK")
     private List<Item> items;
 
     @Column(name = "Error")
