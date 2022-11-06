@@ -27,16 +27,20 @@ public class Order {
     @Column(name = "Error")
     private String error;
 
+    @Column(name="confirmationNumber")
+    private String confirmationNumber;
+
     public Order() {
 
     }
 
-    public Order(long id, Address address, PaymentInfo payment, List<Item> items){
+    public Order(long id, Address address, PaymentInfo payment, List<Item> items, String confirmationNumber){
         this.id = id;
         this.address = address;
         this.payment = payment;
         this.items = items;
         this.error = "";
+        this.confirmationNumber=confirmationNumber;
     }
 
     public long getId() {
@@ -63,6 +67,10 @@ public class Order {
 
     public void setError(String error) {
         this.error = error;
+    }
+
+    public void setConfirmationNumber(String confirmationNumber){
+        this.confirmationNumber = confirmationNumber;
     }
 
 }

@@ -279,3 +279,9 @@ drop table addresses [90107-214]
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Unknown Source)
+2022-11-05 23:57:06 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT * FROM ORDERS ITEMS [*]PAYMENT_CHASE"; SQL statement:
+SELECT * FROM ORDERS ITEMS PAYMENT_CHASE [42000-214]
+2022-11-05 23:57:11 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT * FROM ORDERS ITEMS [*]PAYMENT_CHASE PAYMENTS"; SQL statement:
+SELECT * FROM ORDERS ITEMS PAYMENT_CHASE PAYMENTS [42000-214]
