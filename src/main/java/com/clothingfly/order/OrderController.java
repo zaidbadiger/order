@@ -2,11 +2,11 @@ package com.clothingfly.order;
 
 import java.util.ListIterator;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.context.annotation.RequestScope;
+
 import com.clothingfly.order.Model.Item;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,12 +18,18 @@ import com.clothingfly.order.Model.PaymentChase;
 import com.clothingfly.order.Model.PaymentInfo;
 
 @RestController
+@RequestScope
 @CrossOrigin(origins = "http://localhost:4200")
 public class OrderController {
 
 
     @Autowired
     TempOrderRepository orderRepository;
+
+    @Autowired
+    MessageSender messageSender;
+
+    static final String SHIPMENT_PROCESSING_URL = "http://localhost:8081/";
 
 
     private void checkInventory(Order order) {
@@ -55,9 +61,15 @@ public class OrderController {
 
     @PostMapping("/order")
     public Order postOrder(@RequestBody Order order) {
+    
+      
       String confNumber = checkPayment(order.getPayment());
       Order _order = orderRepository.save(new Order(order.getId(), order.getAddress(), order.getPayment(), order.getItems(), confNumber));
       checkInventory(_order);
+
+      // Call messaging microservice after the successful persistence of the customer order.
+      messageSender.initiateShipping();
+
       return _order;
     }
 }
