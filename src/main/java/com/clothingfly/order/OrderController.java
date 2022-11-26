@@ -56,8 +56,11 @@ public class OrderController {
     @PostMapping("/order")
     public Order postOrder(@RequestBody Order order) {
       String confNumber = checkPayment(order.getPayment());
-      Order _order = orderRepository.save(new Order(order.getId(), order.getAddress(), order.getPayment(), order.getItems(), confNumber));
+      Order _order = new Order(order.getId(), order.getAddress(), order.getPayment(), order.getItems(), confNumber);
       checkInventory(_order);
+      if(_order.getError().isEmpty()){
+          _order = orderRepository.save(_order);
+      }
       return _order;
     }
 }
