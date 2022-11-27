@@ -16,7 +16,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class OrderApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(OrderApplication.class, args);
+		MessageSender.context = SpringApplication.run(OrderApplication.class, args);
 	}
 
 	// // Only required due to defining myFactory in the receiver
