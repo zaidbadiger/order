@@ -31,24 +31,8 @@ import com.clothingfly.order.Model.Order;
 // This class contains the details needed to send an aynchronous message using
 // Java Messaging Service (JMS).
 @Service
-// @RequestScope
-// @Resource(name = "jms/shipmentQCF", lookup = "jms/shipmentQCF", type = ConnectionFactory.class)
 @EnableJms
 public class MessageSender {
-
-    // @Autowired
-    // @JMSConnectionFactory("java:comp/env/jms/shipmentQCF")
-    // private JMSContext jmsContext;
-
-    // @Resource(lookup = "jms/shipmentQ")
-    // private Queue queue;
-
-    // public void initiateShipping() {
-    //     String message = "Shipment Initiation Request from entity: ClothingFly";
-    //     System.out.println("Sending message: \t" + message);
-    //     jmsContext.createProducer().send(queue, message);
-    //     System.out.println("Message Sent");
-    // }
 
     public static ConfigurableApplicationContext context;
 
@@ -58,7 +42,6 @@ public class MessageSender {
         DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();
         // This provides all boot's default to this factory, including the message converter
         configurer.configure(factory, connectionFactory);
-        // You could still override some of Boot's default if necessary.
         return factory;
     }
 
@@ -81,20 +64,3 @@ public class MessageSender {
     }
 
 }
-
-// @RestController
-// @RequestMapping("/shipment-processing")
-// public class MessageSender {
-
-//   @Autowired private JmsTemplate jmsTemplate;
-//   private Queue queue;
-
-//     @PostMapping("/initiate")
-//     public void initiateShipping(@RequestBody Order order) {
-//         String message = "Shipment Initiation Request from entity: ClothingFly";
-//         System.out.println("Sending message: \t" + message);
-//         // Post message to the message queue named "OrderTransactionQueue"
-//         jmsTemplate.convertAndSend("OrderTransactionQueue", order);
-//         System.out.println("Message Sent");
-//     }
-// }

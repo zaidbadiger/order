@@ -18,7 +18,6 @@ import com.clothingfly.order.Model.PaymentChase;
 import com.clothingfly.order.Model.PaymentInfo;
 
 @RestController
- // TODO: Uncomment once messaging service is done or ready to be tested
 @CrossOrigin(origins = "http://localhost:4200")
 public class OrderController {
 
@@ -26,8 +25,8 @@ public class OrderController {
     @Autowired
     TempOrderRepository orderRepository;
 
-    @Autowired // TODO: Uncomment once messaging service is done or ready to be tested
-    MessageSender messageSender; // TODO: Uncomment once messaging service is done or ready to be tested
+    @Autowired
+    MessageSender messageSender;
 
     static final String SHIPMENT_PROCESSING_URL = "http://localhost:8081/";
 
@@ -68,7 +67,7 @@ public class OrderController {
       checkInventory(_order);
 
       // Call messaging microservice after the successful persistence of the customer order.
-      //messageSender.initiateShipping(); // TODO: Uncomment once messaging service is done or ready to be tested
+      messageSender.initiateShipping(); // TODO: Uncomment once messaging service is done or ready to be tested
 
       return _order;
     }
